@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.venv/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+.notebooks_cache/
+
+# Data
+data/
+!data/.gitkeep
+
+# Outputs
+outputs/
+logs/
+
+# OS
+.DS_Store
+
+# VSCode / IDE
+.vscode/
+.idea/
