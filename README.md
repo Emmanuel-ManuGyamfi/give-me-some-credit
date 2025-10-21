@@ -7,7 +7,7 @@ It is based on the [Kaggle "Give Me Some Credit"](https://www.kaggle.com/c/GiveM
 
 ## Project Objectives
 - Develop a **probability-of-default (PD)** model using credit data.  
-- Apply **feature engineering** (handling outliers, imputations, data erros, and scaling).  
+- Apply **feature engineering** (handling outliers, imputations, data errors, and scaling).  
 - Compare algorithms and select the champion model.  
 - Communicate results effectively to **business stakeholders**.
 
@@ -34,25 +34,30 @@ It is based on the [Kaggle "Give Me Some Credit"](https://www.kaggle.com/c/GiveM
 | MonthlyIncome | Self-reported monthly income |
 | NumberOfOpenCreditLinesAndLoans | Number of Open loans (installment like car loan or mortgage) and Lines of credit (e.g. credit cards) |
 | NumberRealEstateLoansOrLines | Number of mortgage and real estate loans including home equity lines of credit |
+| NumberOfDependents | Number of dependents in family excluding themselves (spouse, children etc.) |
 ---
 
-## 🧹 Data Preparation & Feature Engineering
+## Data Preparation & Feature Engineering
 
 - **Outlier Capping:**  
   - DebtRatio capped at 5  
-  - Revolving utilization capped at 2× mean  
-  - Late payment counts capped at 6  
+  - Revolving utilization capped at 2 
+  - Late payment counts capped at 6
+  - NumberOfTime30-59DaysPastDueNotWorse capped at 6
+  - NumberOfTime60-89DaysPastDueNotWorse capped at 6
+  - NumberOfTimes90DaysLate capped at 6
+  - NumberOfDependents capped at 5
+  - NumberOfOpenCreditLinesAndLoans capped at 30
+  - NumberRealEstateLoansOrLines capped at 5
 - **Imputations:**  
-  - Missing ages imputed with median  
-  - Extreme or missing incomes imputed with mean  
-- **Feature Creation:**  
-  - `HighIncomeFlag`  
+  - Replaced implausible values (e.g., over 100 years) with the median age of valid applicants (18–100) 
+  - Extreme monthly incomes imputed with mean of high earners
+- **Feature Creation:**  `  
   - `TotalDelinquencies`  
   - `DependentsPerIncome`
 
 🟦 *Example plot:*  
-![Target Distribution](outputs/target_distribution.png)
-
+<Figure size 500x500 with 1 Axes><img width="404" height="427" alt="image" src="https://github.com/user-attachments/assets/66f9bdd3-90c1-4d42-96d7-508818a31d44" />
 ---
 
 ## ⚙️ Model Development
