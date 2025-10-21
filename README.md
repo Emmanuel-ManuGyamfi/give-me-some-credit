@@ -116,9 +116,10 @@ This section highlights the main risk signals in the *Give Me Some Credit* datas
 ---
 
 ### Feature Engineering
-- Added delinquency-derived variables (`TotalDelinquencies`)
-- Derived income stability indicators (`DependentsPerIncome`)
+- Added delinquency-derived variable (`TotalDelinquencies`)
+- Derived income stability indicator (`DependentsPerIncome`)
 
+---
 
 ## Model Evaluation
 
@@ -147,9 +148,14 @@ Given the **high class imbalance** (only ~6.7% defaults), precision and recall a
 **Accuracy**
   
 - Accuracy remains similar across models (~93.7%), but in imbalanced problems, accuracy is less meaningful than AUC or recall.
+
+### Feature Importance — XGBoost Champion Model
+
+![Feature Importance](outputs/feature_importance.png)
   
 **Key Takeaways:**
-  
+
+- **XGBoost** Champion Model
 - High accuracy reflects class imbalance, thus ROC-AUC and PR-AUC were the main model selection metrics.
 - This level of performance indicates strong predictive separation between low- and high-risk applicants.
 
