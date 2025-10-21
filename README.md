@@ -24,8 +24,8 @@ It is based on the [Kaggle "Give Me Some Credit"](https://www.kaggle.com/c/GiveM
 ## Dataset Overview
 | Feature | Description |
 |----------|-------------|
-| SeriousDlqin2yrs: Target variable — 1 if applicant experienced financial distress |
-| RevolvingUtilizationOfUnsecuredLines: Total credit card balance / total credit limit |
+| SeriousDlqin2yrs | Target variable — 1 Person experienced 90 days past due delinquency or worse |
+| RevolvingUtilizationOfUnsecuredLines | Total balance on credit cards and personal lines of credit except real estate and no installment debt like car loans divided by the sum of credit limits/>|
 | DebtRatio | Debt payments, alimony, etc. divided by gross income |
 | MonthlyIncome | Self-reported monthly income |
 | NumberOfOpenCreditLinesAndLoans | Total number of open loans/credit lines |
