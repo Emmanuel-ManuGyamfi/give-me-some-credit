@@ -167,8 +167,8 @@ Given the **high class imbalance** (only ~6.7% defaults), precision and recall a
 | 9    | `NumberOfDependentsMissing_cleaned`  | Small contribution; weak signal compared to behaviour variables.                |
 
 **Interpretation**
-- **TotalDelinquencies** is the strongest feature it captures borrower past default history directly.
-- **RevolvingUtilization_cleaned** is stong it shows how much revolving credit is being used; key in credit risk.
+- `TotalDelinquencies` is the strongest feature it captures borrower past default history directly.
+- `RevolvingUtilization_cleaned` is stong it shows how much revolving credit is being used; key in credit risk.
 - **Portfolio actionables**: monitor customers with high `TotalDelinquencies` and **very high utilisation** for early-warning and capacity-building interventions.
 
 ### Key Takeaways
