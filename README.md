@@ -1,5 +1,6 @@
 # Give Me Some Credit — Probability of Default Model
 
+**Final Kaggle Model Performance:** Achieved a **ROC-AUC of 0.864** on the Kaggle public leaderboard using a tuned **XGBoost** model.
 This project builds a **credit risk scoring model** to predict the likelihood that a borrower will experience **financial distress within the next two years**.  
 It is based on the [Kaggle "Give Me Some Credit"](https://www.kaggle.com/c/GiveMeSomeCredit) competition dataset and demonstrates **end-to-end data science workflow** from data cleaning and feature engineering to model tuning and evaluation.
 
