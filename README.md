@@ -70,6 +70,8 @@ Given the **high class imbalance** (only ~6.7% defaults), precision and recall a
 | **XGBoost (CV)** | 0.601807 | 0.166800 | 0.260878 | 0.936676 | **0.864169** |
 | **XGBoost (Test)** | 0.614815 | 0.166600 | **0.262160** | **0.937453** | 0.862600 |
 
+<Figure size 1200x800 with 4 Axes><img width="1088" height="790" alt="image" src="https://github.com/user-attachments/assets/0825eb42-562c-45c4-8907-f97f288fb50f" />
+
 **AUC-ROC & PR-AUC**
 - XGBoost achieved a slightly higher ROC-AUC (0.863) compared to Random Forest (0.860), indicating stronger overall ranking ability.
 - The Precision–Recall AUC (0.405 vs 0.398) also favors XGBoost, confirming better performance on the imbalanced target (defaults).
