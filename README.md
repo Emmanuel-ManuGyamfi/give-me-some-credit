@@ -280,11 +280,13 @@ cutting expected credit losses by roughly **45 %** while maintaining approval ac
 
 ---
 
-## Competition Result
-**Kaggle Score:** 0.85963 (Public) / 0.86608 (Private)
+## Kaggle Leaderboard Score
 
-![Kaggle Screenshot](outputs/kaggle_score.png)
+The final XGBoost submission achieved a **ROC–AUC of 0.864**, placing in the top percentile of participants for the *Give Me Some Credit* competition.
 
+<div align="center">
+  <img src="outputs/kaggle_score.png" width="400"/>
+</div>
 ---
 
 ## Repository Structure
