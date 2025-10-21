@@ -263,14 +263,14 @@ To optimise business impact, we analysed the **Precision–Recall–Threshold** 
 
 ---
 
-### Business Impact Simulation — 100 000 Applicants
+### Business Impact Simulation — 100,000 Applicants
 
 Using the model at the **23 % threshold**, scaled from the test confusion matrix:
 
 | **Actual \\ Predicted** | **No Default** | **Default (High Risk)** |
 |--------------------------|:---------------:|:-----------------------:|
-| **No Default** | 88 780 | 4 630 |
-| **Default** | 3 390 | **3 290** |
+| **No Default** | 88,780 | 4,630 |
+| **Default** | 3,390 | **3,290** |
 
 **Key Insights**
 - **7 920 applicants (≈ 8 %)** are flagged as **high risk** → sent for manual review or tighter credit limits.  
