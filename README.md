@@ -4,6 +4,12 @@
 This project builds a **credit risk scoring model** to predict the likelihood that a borrower will experience **financial distress within the next two years**.  
 It is based on the [Kaggle "Give Me Some Credit"](https://www.kaggle.com/c/GiveMeSomeCredit) competition dataset and demonstrates **end-to-end data science workflow** from data cleaning and feature engineering to model tuning and evaluation.
 
+Key highlights:
+- Exploratory Data Analysis identifying the main drivers of financial distress.  
+- Feature engineering with outlier handling, imputation, and behavioural flags.  
+- Model comparison (Random Forest vs XGBoost) with detailed threshold calibration.  
+- Business simulation translating model results into portfolio-level credit insights.
+
 ---
 
 ## Project Objectives
