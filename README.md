@@ -37,7 +37,7 @@ It is based on the [Kaggle "Give Me Some Credit"](https://www.kaggle.com/c/GiveM
 | NumberOfDependents | Number of dependents in family excluding themselves (spouse, children etc.) |
 ---
 
-## Data Preparation & Feature Engineering
+## Data Preparation
 
 - **Outlier Capping:**  
   - `DebtRatio` capped at 5  
@@ -51,12 +51,74 @@ It is based on the [Kaggle "Give Me Some Credit"](https://www.kaggle.com/c/GiveM
 - **Imputations:**  
   - Replaced implausible values (e.g., over 100 years) with the median age of valid applicants (18–100) 
   - Extreme monthly incomes imputed with mean of high earners
-- **Feature Creation:**  `  
-  - `TotalDelinquencies`  
-  - `DependentsPerIncome`
 
-🟦 *Example plot:*  
-<Figure size 500x500 with 1 Axes><img width="404" height="427" alt="image" src="https://github.com/user-attachments/assets/66f9bdd3-90c1-4d42-96d7-508818a31d44" />
+## Exploratory Data Analysis (EDA)
+
+This section highlights the main risk signals in the *Give Me Some Credit* dataset and motivates the engineered features used in the model.
+
+---
+
+#### Key takeaways
+- **Severe class imbalance:** Only ~6.7% default → accuracy alone is misleading; AUC/PR metrics and thresholding are essential.
+- **Age** Distribution remains approximately normal, centered around age 50 - 55. Most applicants are between 30 and 70 years old, with fewer very young or elderly individuals.
+- **Age vs. risk:** Default rates are **highest in younger groups (18–29)** and steadily decline with age, reflecting income stability and credit maturity.  
+- **Income and utilization:** High revolving utilization and low income remain the strongest indicators of financial distress.  
+- **Debt ratio:** Non-linear relationship; risk peaks around moderate ratios (1–2) before tapering.  
+- **Delinquency patterns:** Multiple past delinquencies sharply increase default probability.  
+
+---
+
+### Data Distributions and Risk Patterns
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="outputs/eda_target_pie.png" width="360"/><br/>
+      <em>Target distribution (6.7% default)</em>
+    </td>
+    <td align="center">
+      <img src="outputs/eda_age_distribution.png" width="520"/><br/>
+      <em>Distribution of Applicant Age</em>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="outputs/eda_default_by_age.png" width="520"/><br/>
+      <em>Default rate by age group — risk declines with age</em>
+    </td>
+    <td align="center">
+      <img src="outputs/eda_income_band_combo.png" width="520"/><br/>
+      <em>Applicants & default by income band</em>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="outputs/eda_util_band_default_rate.png" width="520"/><br/>
+      <em>Default rate by revolving utilization</em>
+    </td>
+    <td align="center">
+      <img src="outputs/eda_debtratio_band_default_rate.png" width="520"/><br/>
+      <em>Default rate by debt ratio band</em>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="outputs/eda_revutil_distribution.png" width="520"/><br/>
+      <em>Distribution of revolving utilization (right-skewed)</em>
+    </td>
+    <td align="center">
+      <img src="outputs/eda_90days_default_rate.png" width="520"/><br/>
+      <em>Default rate by number of 90-day late events</em>
+    </td>
+  </tr>
+</table>
+
+---
+
+### Feature Engineering
+- Added delinquency-derived variables (`TotalDelinquencies`)
+- Derived income stability indicators (`DependentsPerIncome`)
+
 
 ## Model Evaluation
 
@@ -88,7 +150,7 @@ Given the **high class imbalance** (only ~6.7% defaults), precision and recall a
   
 **Key Takeaways:**
   
-- High accuracy reflects class imbalance — thus ROC-AUC and PR-AUC were the main model selection metrics.
+- High accuracy reflects class imbalance, thus ROC-AUC and PR-AUC were the main model selection metrics.
 - This level of performance indicates strong predictive separation between low- and high-risk applicants.
 
 ---
