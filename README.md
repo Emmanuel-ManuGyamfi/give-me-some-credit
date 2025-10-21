@@ -40,12 +40,11 @@ It is based on the [Kaggle "Give Me Some Credit"](https://www.kaggle.com/c/GiveM
 ## Data Preparation & Feature Engineering
 
 - **Outlier Capping:**  
-  - 'DebtRatio' capped at 5  
-  - Revolving utilization capped at 2 
-  - Late payment counts capped at 6
-  - NumberOfTime30-59DaysPastDueNotWorse capped at 6
-  - NumberOfTime60-89DaysPastDueNotWorse capped at 6
-  - NumberOfTimes90DaysLate capped at 6
+  - `DebtRatio` capped at 5  
+  - `RevolvingUtilizationOfUnsecuredLines` capped at 2 
+  - `NumberOfTime30-59DaysPastDueNotWorse` capped at 6
+  - `NumberOfTime60-89DaysPastDueNotWorse` capped at 6
+  - NumberOfTimes90DaysLate `NumberOfTimes90DaysLate` capped at 6
   - NumberOfDependents capped at 5
   - NumberOfOpenCreditLinesAndLoans capped at 30
   - NumberRealEstateLoansOrLines capped at 5
