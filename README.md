@@ -44,10 +44,10 @@ It is based on the [Kaggle "Give Me Some Credit"](https://www.kaggle.com/c/GiveM
   - `RevolvingUtilizationOfUnsecuredLines` capped at 2 
   - `NumberOfTime30-59DaysPastDueNotWorse` capped at 6
   - `NumberOfTime60-89DaysPastDueNotWorse` capped at 6
-  - NumberOfTimes90DaysLate `NumberOfTimes90DaysLate` capped at 6
-  - NumberOfDependents capped at 5
-  - NumberOfOpenCreditLinesAndLoans capped at 30
-  - NumberRealEstateLoansOrLines capped at 5
+  - `NumberOfTimes90DaysLate` capped at 6
+  - `NumberOfDependents` capped at 5
+  - `NumberOfOpenCreditLinesAndLoans` capped at 30
+  - `NumberRealEstateLoansOrLines` capped at 5
 - **Imputations:**  
   - Replaced implausible values (e.g., over 100 years) with the median age of valid applicants (18–100) 
   - Extreme monthly incomes imputed with mean of high earners
@@ -57,7 +57,6 @@ It is based on the [Kaggle "Give Me Some Credit"](https://www.kaggle.com/c/GiveM
 
 🟦 *Example plot:*  
 <Figure size 500x500 with 1 Axes><img width="404" height="427" alt="image" src="https://github.com/user-attachments/assets/66f9bdd3-90c1-4d42-96d7-508818a31d44" />
----
 
 ## ⚙️ Model Development
 
