@@ -226,24 +226,86 @@ Algorithm: **XGBoost Classifier**
 
 ---
 
-## 💡 Business Impact
+## 🧭 Decision Threshold Selection
 
-This model allows financial institutions to:
-- **Screen applicants** more accurately for credit risk  
-- **Reduce bad debt rates** by targeting interventions  
-- **Support fair lending** through interpretable variables  
-- Simulate business impact:  
-  > For every **100,000 applicants**, improved screening accuracy could reduce bad loans by ~8–10%, saving millions annually.
+**Chosen Threshold: 23% probability of financial distress**
+
+The model outputs a probability between 0 and 1 representing the likelihood that a customer will experience financial distress within two years.  
+By default, a threshold of **50%** is often used (classify as “default” if predicted probability ≥ 0.5), but this assumes:
+- A balanced dataset, and  
+- Equal business cost for false positives (rejecting good customers) and false negatives (approving future defaulters)
+
+Given the **strong class imbalance (~6.7% defaults)**, a 0.5 cut-off would miss many real defaulters.  
+To optimise business impact, we analysed the **Precision–Recall–Threshold** curve and selected the point that maximises the **F1-score** — the intersection of precision and recall.
 
 ---
 
-## 🧠 Learnings & Next Steps
-- Handling class imbalance effectively using `scale_pos_weight` and proper thresholds.  
-- Feature importance analysis to ensure fairness and interpretability.  
-- Future work:  
-  - Calibrated probability outputs  
-  - SHAP-based interpretability  
-  - Monitoring drift in production.
+### Threshold Optimisation
+
+| Metric | Value |
+|:--------|:------:|
+| **Optimal Threshold** | **0.227 (~23%)** |
+| **Precision** | **0.415** |
+| **Recall** | **0.493** |
+| **F1-score** | **0.451** |
+| **Accuracy** | 0.920 |
+| **AUC-ROC (threshold-independent)** | 0.721 |
+
+<div align="center">
+
+<img src="outputs/precision_recall_curve.png" width="450"/>
+
+### Confusion Matrix (Test Set @ 0.23)
+
+<img src="outputs/confusion_matrix.png" width="350"/>
+
+</div>
+
+---
+
+### Business Impact Simulation — 100 000 Applicants
+
+Using the model at the **23 % threshold**, scaled from the test confusion matrix:
+
+| **Actual \\ Predicted** | **No Default** | **Default (High Risk)** |
+|--------------------------|:---------------:|:-----------------------:|
+| **No Default** | 88 780 | 4 630 |
+| **Default** | 3 390 | **3 290** |
+
+**Key Insights**
+- **7 920 applicants (≈ 8 %)** are flagged as **high risk** → sent for manual review or tighter credit limits.  
+- The model **captures nearly half of all true defaulters**, preventing substantial portfolio losses.  
+- **False positives (4.6 %)** represent cautious approvals — a prudent trade-off in credit underwriting.  
+- **Missed defaulters (3.4 %)** can be managed through post-lending monitoring or early-warning triggers.  
+- Reduces expected default losses by identifying risky applicants earlier in the pipeline.  
+- Supports a credit policy that prioritises **risk detection over marginal approvals**, consistent with responsible-lending practices.
+
+---
+
+### Portfolio Default Rate Impact
+
+By rejecting or reviewing applicants with ≥ 23 % predicted default probability,  
+the model reduces the **portfolio default rate from 6.7 % to ≈ 3.7 %**,  
+cutting expected credit losses by roughly **45 %** while maintaining approval access for **~92 %** of applicants  
+(~89 % of which are genuinely low-risk).
+
+---
+
+### Summary Insight
+
+- The **optimal 0.23 threshold** maximises operational utility — balancing recall and profitability.  
+- Default detection improves substantially without severely restricting credit access.  
+- This analytical framework enables data-driven **credit-strategy calibration** — the threshold can be raised or lowered to match changing risk appetite or macro-economic conditions.
+
+---
+
+### Next Steps
+
+- **Add bureau and external features** (e.g., credit bureau scores, loan inquiries, payment history) to enrich predictive power and improve early-warning sensitivity.  
+- **Calibrate probability outputs** to align model predictions with observed default rates, improving scorecard usability for policy cut-offs.  
+- Implement **SHAP-based interpretability** to explain individual applicant decisions and enhance fairness and transparency.  
+- **Monitor portfolio performance** post-deployment — track drift, re-train thresholds as macroeconomic or behavioural patterns evolve.  
+- Explore **profit-based optimisation** (Expected Loss or Cost–Benefit metrics) to link model outcomes directly to financial impact.
 
 ---
 
