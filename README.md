@@ -94,7 +94,7 @@ This section highlights the main risk signals in the *Give Me Some Credit* datas
   <tr>
     <td align="center">
       <img src="outputs/eda_util_band_default_rate.png" width="520"/><br/>
-      <em>Default rate by revolving utilization</em>
+      <em>Default rate by revolving utilisation</em>
     </td>
     <td align="center">
       <img src="outputs/eda_debtratio_band_default_rate.png" width="520"/><br/>
@@ -104,7 +104,7 @@ This section highlights the main risk signals in the *Give Me Some Credit* datas
   <tr>
     <td align="center">
       <img src="outputs/eda_revutil_distribution.png" width="520"/><br/>
-      <em>Distribution of revolving utilization (right-skewed)</em>
+      <em>Distribution of revolving utilisation (right-skewed)</em>
     </td>
     <td align="center">
       <img src="outputs/eda_90days_default_rate.png" width="520"/><br/>
