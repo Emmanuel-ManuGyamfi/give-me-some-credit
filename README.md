@@ -1,100 +1,132 @@
-# Give Me Some Credit — Kaggle (GMSC)
+# Give Me Some Credit — Probability of Default Model
 
-Reproducible code and write-up for the **Give Me Some Credit** Kaggle competition.
+This project builds a **credit risk scoring model** to predict the likelihood that a borrower will experience **financial distress within the next two years**.  
+It is based on the [Kaggle "Give Me Some Credit"](https://www.kaggle.com/c/GiveMeSomeCredit) competition dataset and demonstrates **end-to-end data science workflow** from data cleaning and feature engineering to model tuning and evaluation.
 
-This repo contains a clean pipeline to:
-- create features
-- train models with cross-validation
-- evaluate offline metrics
-- generate a Kaggle-ready `submission.csv`
+---
 
-> **Status:** Complete first submission uploaded on 2025-10-20.
+## Project Objectives
+- Develop a **probability-of-default (PD)** model using credit data.  
+- Apply **feature engineering** (handling outliers, imputations, data erros, and scaling).  
+- Compare algorithms and select the champion model.  
+- Communicate results effectively to **business stakeholders**.
 
-## Quickstart
+---
 
-```bash
-# 1) Clone and enter
-git clone <YOUR_REPO_URL> give-me-some-credit
-cd give-me-some-credit
+## Tech Stack
+- **Language:** Python 3.12  
+- **Libraries:** pandas, numpy, scikit-learn, xgboost, matplotlib, seaborn  
+- **Environment:** Conda / venv  
+- **Tools:** Jupyter Notebooks, GitHub, Kaggle  
 
-# 2) Create environment (pick one)
-conda env create -f environment.yml && conda activate gmsc
-# OR
-python -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt
+---
 
-# 3) Put raw data here (ignored by git)
-# data/raw/cs-training.csv
-# data/raw/cs-test.csv
+## Dataset Overview
+| Feature | Description |
+|----------|-------------|
+| SeriousDlqin2yrs: Target variable — 1 if applicant experienced financial distress |
+| RevolvingUtilizationOfUnsecuredLines: Total credit card balance / total credit limit |
+| DebtRatio | Debt payments, alimony, etc. divided by gross income |
+| MonthlyIncome | Self-reported monthly income |
+| NumberOfOpenCreditLinesAndLoans | Total number of open loans/credit lines |
+| … | *(and other credit-behavioral predictors)* |
 
-# (Optional) Use Kaggle API to download (requires kaggle.json configured)
-make data
+---
 
-# 4) Reproduce pipeline
-make train
-make evaluate
-make submit
-```
+## 🧹 Data Preparation & Feature Engineering
 
-## Repository structure
+- **Outlier Capping:**  
+  - DebtRatio capped at 5  
+  - Revolving utilization capped at 2× mean  
+  - Late payment counts capped at 6  
+- **Imputations:**  
+  - Missing ages imputed with median  
+  - Extreme or missing incomes imputed with mean  
+- **Feature Creation:**  
+  - `HighIncomeFlag`  
+  - `TotalDelinquencies`  
+  - `DependentsPerIncome`
 
-```
-.
-├── README.md
-├── LICENSE
-├── environment.yml
-├── requirements.txt
-├── Makefile
-├── .gitignore
-├── notebooks/
-│   ├── 01-eda.ipynb
-│   └── 02-model-experiments.ipynb
-├── src/
-│   ├── config.py
-│   ├── features.py
-│   ├── train.py
-│   ├── evaluate.py
-│   ├── make_submission.py
-│   └── utils.py
-└── data/
-    ├── raw/        # put Kaggle CSVs here (gitignored)
-    ├── interim/    # intermediate files (gitignored)
-    └── processed/  # model-ready parquet/csv (gitignored)
-```
+🟦 *Example plot:*  
+![Target Distribution](outputs/target_distribution.png)
 
-## Data
+---
 
-- Competition: *Give Me Some Credit*
-- Columns like `RevolvingUtilizationOfUnsecuredLines`, `DebtRatio`, etc.
-- **Do not commit raw data** — this repo ignores `data/` by default.
+## ⚙️ Model Development
 
-## Approach (short)
-- Robust preprocessing: missing values, outlier handling, and flags for imputations (e.g., high income flag).
-- Feature set: utilization, delinquencies, debt ratios, engineered interactions; SHAP/importance for interpretability.
-- Models: baseline Logistic Regression; tree-based (RandomForest / XGBoost) tuned by CV.
-- Validation: stratified K-fold across full training set with fixed random seed.
-- Metric: ROC AUC (primary), plus PR AUC, F1, and recall.
-- Deliverables: `submission.csv` with `Id` and `Probability` columns.
+Algorithm: **XGBoost Classifier**
 
-## Reproducibility
-- Fixed `RANDOM_SEED=42`.
-- `environment.yml` / `requirements.txt` lock key versions.
-- Deterministic scikit-learn settings where applicable.
+| Hyperparameter | Value |
+|----------------|--------|
+| `n_estimators` | 800 |
+| `learning_rate` | 0.01 |
+| `max_depth` | 4 |
+| `subsample` | 0.6 |
+| `colsample_bytree` | 0.8 |
+| `gamma` | 0.2 |
+| `min_child_weight` | 10 |
+| `scale_pos_weight` | 1 |
+| `reg_alpha` | 0.5 |
+| `reg_lambda` | 1 |
 
-## Results
-- Public LB score: *add your score here*  
-- Local CV ROC AUC: *add your mean ± std here*
-- Notes on any generalization gap between CV and public scoreboard.
+---
 
-## How to rerun with your code
-Drop your finished feature engineering into `src/features.py` and your trained model choice into `src/train.py`. The CLI entry points are already wired via the Makefile.
+## 🧪 Model Evaluation
 
-## Model Card (brief)
-- **Intended use:** credit distress prediction over 2 years.
-- **Limitations:** dataset shift risk, sensitive attribute handling, potential fairness concerns.
-- **Ethics:** apply responsibly; avoid individual-level adverse action explanations without rigorous review.
+| Metric | Score |
+|---------|-------|
+| **ROC-AUC (CV)** | 0.8642 |
+| **Kaggle Private Score** | 0.8661 |
+| **Accuracy** | ~86% |
+| **Precision (1)** | 0.62 |
+| **Recall (1)** | 0.15 |
+| **F1-score (1)** | 0.24 |
 
-## Citation
-If you reference this repo, please cite via `CITATION.cff` or link to this page.
+---
 
-## License
+### 📈 Key Charts
+
+- ROC Curve  
+  ![ROC Curve](outputs/roc_curve.png)
+
+- Precision-Recall Curve  
+  ![PR Curve](outputs/pr_curve.png)
+
+- Confusion Matrix  
+  ![Confusion Matrix](outputs/confusion_matrix.png)
+
+- Feature Importance  
+  ![Feature Importance](outputs/feature_importance.png)
+
+---
+
+## 💡 Business Impact
+
+This model allows financial institutions to:
+- **Screen applicants** more accurately for credit risk  
+- **Reduce bad debt rates** by targeting interventions  
+- **Support fair lending** through interpretable variables  
+- Simulate business impact:  
+  > For every **100,000 applicants**, improved screening accuracy could reduce bad loans by ~8–10%, saving millions annually.
+
+---
+
+## 🧠 Learnings & Next Steps
+- Handling class imbalance effectively using `scale_pos_weight` and proper thresholds.  
+- Feature importance analysis to ensure fairness and interpretability.  
+- Future work:  
+  - Calibrated probability outputs  
+  - SHAP-based interpretability  
+  - Monitoring drift in production.
+
+---
+
+## 🏆 Competition Result
+**Kaggle Score:** 0.85963 (Public) / 0.86608 (Private)  
+![Kaggle Screenshot](outputs/kaggle_score.png)
+
+---
+
+## 📁 Repository Structure
+
 MIT — see [LICENSE](LICENSE).
