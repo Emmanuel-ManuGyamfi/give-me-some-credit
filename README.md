@@ -35,6 +35,7 @@ It is based on the [Kaggle "Give Me Some Credit"](https://www.kaggle.com/c/GiveM
 | NumberOfOpenCreditLinesAndLoans | Number of Open loans (installment like car loan or mortgage) and Lines of credit (e.g. credit cards) |
 | NumberRealEstateLoansOrLines | Number of mortgage and real estate loans including home equity lines of credit |
 | NumberOfDependents | Number of dependents in family excluding themselves (spouse, children etc.) |
+
 ---
 
 ## Data Preparation
@@ -55,8 +56,6 @@ It is based on the [Kaggle "Give Me Some Credit"](https://www.kaggle.com/c/GiveM
 ## Exploratory Data Analysis (EDA)
 
 This section highlights the main risk signals in the *Give Me Some Credit* dataset and motivates the engineered features used in the model.
-
----
 
 #### Key takeaways
 - **Severe class imbalance:** Only ~6.7% default → accuracy alone is misleading; AUC/PR metrics and thresholding are essential.
@@ -152,12 +151,30 @@ Given the **high class imbalance** (only ~6.7% defaults), precision and recall a
 ### Feature Importance — XGBoost Champion Model
 
 ![Feature Importance](outputs/feature_importance.png)
-  
-**Key Takeaways:**
 
-- **XGBoost** Champion Model
-- High accuracy reflects class imbalance, thus ROC-AUC and PR-AUC were the main model selection metrics.
-- This level of performance indicates strong predictive separation between low- and high-risk applicants.
+**Top Predictive Features (from the chart)**
+| Rank | Feature                              | What it signals                                                                 |
+|-----:|--------------------------------------|----------------------------------------------------------------------------------|
+| 1    | `TotalDelinquencies`                 | Aggregated delinquency; strongest indicator of repayment risk.        |   
+| 2    | `RevolvingUtilization_cleaned`       | Credit utilisation; High credit usage is a powerful distress indicator.  |
+| 3    | `age_imputed`                        | Younger borrowers show higher default probability (stability/maturity effect).   |
+| 4    | `NumberRealEstateLoansOrLines_cleaned` | Exposure to long-term secured credit; higher counts can raise obligations.     |
+| 5    | `NumberOfOpenCreditLinesAndLoans_cleaned` | Indicates credit exposure, moderate levels are safer.                           |
+| 6    | `DebtRatio_cleaned`                  | High ratios indicate leveraged households and repayment strain.               |
+| 7    | `Missing_MonthlyIncome_Imputed`      | Income signal (and missingness) correlated with affordability risk.             |
+| 8    | `DependentsPerIncome`                | Higher dependents often correlate with tighter household budgets.     |
+| 9    | `NumberOfDependentsMissing_cleaned`  | Small contribution; weak signal compared to behaviour variables.                |
+
+**Interpretation**
+- **TotalDelinquencies** is the strongest feature it captures borrower past default history directly.
+- **RevolvingUtilization_cleaned** is stong it shows how much revolving credit is being used; key in credit risk.
+- **Portfolio actionables**: monitor customers with high `TotalDelinquencies` and **very high utilisation** for early-warning and capacity-building interventions.
+
+### Key Takeaways
+
+- **XGBoost** selected as the final production model due to stronger AUC and recall performance.  
+- High accuracy reflects class imbalance, so **ROC-AUC and PR-AUC** were prioritized for model selection.  
+- The model provides strong predictive separation between **low-risk** and **high-risk** applicants, supporting fairer and more data-driven lending decisions.
 
 ---
 
