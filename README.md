@@ -65,12 +65,10 @@ Given the **high class imbalance** (only ~6.7% defaults), precision and recall a
 
 | Model | Precision | Recall | F1 | Accuracy | ROC-AUC |
 |--------|------------|--------|------------|----------|----------|
-| **Random Forest (CV)** | 0.616 | 0.145 | 0.234 | 0.937 | 0.8627 |
-| **Random Forest (Test)** | 0.620 | 0.147 | 0.238 | 0.937 | 0.8604 |
-| **XGBoost (CV)** | 0.602 | 0.167 | 0.261 | 0.937 | **0.8642** |
-| **XGBoost (Test)** | 0.615 | 0.167 | **0.262** | **0.937** | 0.8626 |
-
-<Figure size 700x500 with 1 Axes><img width="624" height="470" alt="image" src="https://github.com/user-attachments/assets/1791ef4c-8b9a-4b40-b88e-a67efdd6012b" /> <Figure size 700x500 with 1 Axes><img width="624" height="470" alt="image" src="https://github.com/user-attachments/assets/62d4ec28-0924-4fc8-b0d3-a954ba3c0f26" />
+| **Random Forest (CV)** | 0.615688 | 0.144719 | 0.233992 | 0.936533 | 0.862698 |
+| **Random Forest (Test)** | 0.619932 | 0.147330 | 0.238080 | 0.937105 | 0.860421 |
+| **XGBoost (CV)** | 0.601807 | 0.166800 | 0.260878 | 0.936676 | **0.864169** |
+| **XGBoost (Test)** | 0.614815 | 0.166600 | **0.262160** | **0.937453** | 0.862600 |
 
 **AUC-ROC & PR-AUC**
 - XGBoost achieved a slightly higher ROC-AUC (0.863) compared to Random Forest (0.860), indicating stronger overall ranking ability.
