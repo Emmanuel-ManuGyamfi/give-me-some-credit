@@ -58,6 +58,34 @@ It is based on the [Kaggle "Give Me Some Credit"](https://www.kaggle.com/c/GiveM
 🟦 *Example plot:*  
 <Figure size 500x500 with 1 Axes><img width="404" height="427" alt="image" src="https://github.com/user-attachments/assets/66f9bdd3-90c1-4d42-96d7-508818a31d44" />
 
+## Model Evaluation
+
+The models were evaluated using multiple metrics to capture both discrimination and balance performance.  
+Given the **high class imbalance** (only ~6.7% defaults), precision and recall are more informative than accuracy alone.
+
+| Model | Precision | Recall | F1 | Accuracy | ROC-AUC |
+|--------|------------|--------|------------|----------|----------|
+| **Random Forest (CV)** | 0.616 | 0.145 | 0.234 | 0.937 | 0.8627 |
+| **Random Forest (Test)** | 0.620 | 0.147 | 0.238 | 0.937 | 0.8604 |
+| **XGBoost (CV)** | 0.602 | 0.167 | 0.261 | 0.937 | **0.8642** |
+| **XGBoost (Test)** | 0.615 | 0.167 | **0.262** | **0.937** | 0.8626 |
+
+<Figure size 700x500 with 1 Axes><img width="624" height="470" alt="image" src="https://github.com/user-attachments/assets/1791ef4c-8b9a-4b40-b88e-a67efdd6012b" /> <Figure size 700x500 with 1 Axes><img width="624" height="470" alt="image" src="https://github.com/user-attachments/assets/62d4ec28-0924-4fc8-b0d3-a954ba3c0f26" />
+
+**AUC-ROC & PR-AUC**
+- XGBoost achieved a slightly higher ROC-AUC (0.863) compared to Random Forest (0.860), indicating stronger overall ranking ability.
+- The Precision–Recall AUC (0.405 vs 0.398) also favors XGBoost, confirming better performance on the imbalanced target (defaults).
+**Recall & F1-score** 
+- XGBoost captures more true defaulters (recall = 0.167) than Random Forest (recall = 0.147), while maintaining a similar precision.
+- This leads to a higher F1-score, meaning XGBoost provides a better balance between precision and recall.
+**Accuracy**
+- Accuracy remains similar across models (~93.7%), but in imbalanced problems, accuracy is less meaningful than AUC or recall.
+**Key Takeaways:**
+- High accuracy reflects class imbalance — thus ROC-AUC and PR-AUC were the main model selection metrics.
+- This level of performance indicates strong predictive separation between low- and high-risk applicants.
+
+---
+
 ## ⚙️ Model Development
 
 Algorithm: **XGBoost Classifier**
