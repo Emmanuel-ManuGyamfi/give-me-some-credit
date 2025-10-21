@@ -244,7 +244,7 @@ Using the model at the **23 % threshold**, scaled from the test confusion matrix
 | **Default** | 3,390 | **3,290** |
 
 **Key Insights**
-- **7 920 applicants (≈ 8 %)** are flagged as **high risk** → sent for manual review or tighter credit limits.  
+- **7,920 applicants (≈ 8 %)** are flagged as **high risk** → sent for manual review or tighter credit limits.  
 - The model **captures nearly half of all true defaulters**, preventing substantial portfolio losses.  
 - **False positives (4.6 %)** represent cautious approvals — a prudent trade-off in credit underwriting.  
 - **Missed defaulters (3.4 %)** can be managed through post-lending monitoring or early-warning triggers.  
@@ -281,11 +281,12 @@ cutting expected credit losses by roughly **45 %** while maintaining approval ac
 ---
 
 ## Competition Result
-**Kaggle Score:** 0.85963 (Public) / 0.86608 (Private)  
+**Kaggle Score:** 0.85963 (Public) / 0.86608 (Private)
+
 ![Kaggle Screenshot](outputs/kaggle_score.png)
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 MIT — see [LICENSE](LICENSE).
