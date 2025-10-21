@@ -25,12 +25,15 @@ It is based on the [Kaggle "Give Me Some Credit"](https://www.kaggle.com/c/GiveM
 | Feature | Description |
 |----------|-------------|
 | SeriousDlqin2yrs | Target variable — 1 Person experienced 90 days past due delinquency or worse |
-| RevolvingUtilizationOfUnsecuredLines | Total balance on credit cards and personal lines of credit except real estate and no installment debt like car loans divided by the sum of credit limits/>|
-| DebtRatio | Debt payments, alimony, etc. divided by gross income |
+| RevolvingUtilizationOfUnsecuredLines | Total balance on credit cards and personal lines of credit except real estate and no installment debt like car loans divided by the sum of credit limits|
+| Age| Age of borrower in years |
+| NumberOfTime30-59DaysPastDueNotWorse | Number of times borrower has been 30-59 days past due but no worse in the last 2 years |
+| NumberOfTime60-89DaysPastDueNotWorse | Number of times borrower has been 60-89 days past due but no worse in the last 2 years |
+| NumberOfTimes90DaysLate | Number of times borrower has been 90 days or more past due |
+| DebtRatio | Monthly debt payments, alimony,living costs divided by monthy gross income |
 | MonthlyIncome | Self-reported monthly income |
-| NumberOfOpenCreditLinesAndLoans | Total number of open loans/credit lines |
-| … | *(and other credit-behavioral predictors)* |
-
+| NumberOfOpenCreditLinesAndLoans | Number of Open loans (installment like car loan or mortgage) and Lines of credit (e.g. credit cards) |
+| NumberRealEstateLoansOrLines | Number of mortgage and real estate loans including home equity lines of credit |
 ---
 
 ## 🧹 Data Preparation & Feature Engineering
