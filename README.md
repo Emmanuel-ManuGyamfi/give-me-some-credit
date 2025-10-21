@@ -59,6 +59,8 @@ Key highlights:
 - **Imputations:**  
   - Replaced implausible values (e.g., over 100 years) with the median age of valid applicants (18–100) 
   - Extreme monthly incomes imputed with mean of high earners
+ 
+---
 
 ## Exploratory Data Analysis (EDA)
 
