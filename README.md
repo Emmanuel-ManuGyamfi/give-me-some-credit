@@ -178,7 +178,7 @@ Given the **high class imbalance** (only ~6.7% defaults), precision and recall a
 
 ---
 
-## ⚙️ Model Development
+## Model Development
 
 Algorithm: **XGBoost Classifier**
 
@@ -197,36 +197,7 @@ Algorithm: **XGBoost Classifier**
 
 ---
 
-## 🧪 Model Evaluation
-
-| Metric | Score |
-|---------|-------|
-| **ROC-AUC (CV)** | 0.8642 |
-| **Kaggle Private Score** | 0.8661 |
-| **Accuracy** | ~86% |
-| **Precision (1)** | 0.62 |
-| **Recall (1)** | 0.15 |
-| **F1-score (1)** | 0.24 |
-
----
-
-### 📈 Key Charts
-
-- ROC Curve  
-  ![ROC Curve](outputs/roc_curve.png)
-
-- Precision-Recall Curve  
-  ![PR Curve](outputs/pr_curve.png)
-
-- Confusion Matrix  
-  ![Confusion Matrix](outputs/confusion_matrix.png)
-
-- Feature Importance  
-  ![Feature Importance](outputs/feature_importance.png)
-
----
-
-## 🧭 Decision Threshold Selection
+## Decision Threshold Selection
 
 **Chosen Threshold: 23% probability of financial distress**
 
@@ -309,7 +280,7 @@ cutting expected credit losses by roughly **45 %** while maintaining approval ac
 
 ---
 
-## 🏆 Competition Result
+## Competition Result
 **Kaggle Score:** 0.85963 (Public) / 0.86608 (Private)  
 ![Kaggle Screenshot](outputs/kaggle_score.png)
 
