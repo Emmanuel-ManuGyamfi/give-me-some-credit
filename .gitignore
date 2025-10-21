@@ -1,27 +1,21 @@
-# Python
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-*.egg-info/
+# Ignore virtual environments, caches, and large data
 .venv/
-.env
-
-# Jupyter
-.ipynb_checkpoints/
-.notebooks_cache/
-
-# Data
+__pycache__/
+*.pkl
+*.joblib
+*.csv
 data/
-!data/.gitkeep
-
-# Outputs
-outputs/
-logs/
-
-# OS
+notebooks/.ipynb_checkpoints/
 .DS_Store
 
-# VSCode / IDE
-.vscode/
-.idea/
+# Outputs: ignore everything by default…
+outputs/*
+# …but keep images and small files for README visualization
+!outputs/*.png
+!outputs/*.jpg
+!outputs/*.jpeg
+!outputs/*.svg
+!outputs/*.gif
+!outputs/*.pdf
+!outputs/*.json
+!outputs/*.md
