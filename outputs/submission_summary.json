@@ -1,0 +1,25 @@
+{
+  "model": "XGBoost",
+  "params": {
+    "subsample": 0.6,
+    "scale_pos_weight": 1,
+    "reg_lambda": 1,
+    "reg_alpha": 0.5,
+    "n_estimators": 800,
+    "min_child_weight": 10,
+    "max_depth": 4,
+    "learning_rate": 0.01,
+    "gamma": 0.2,
+    "colsample_bytree": 0.8,
+    "objective": "binary:logistic",
+    "eval_metric": "auc",
+    "random_state": 42,
+    "n_jobs": -1,
+    "tree_method": "hist"
+  },
+  "train_rows": 150000,
+  "train_cols": 9,
+  "test_rows": 101503,
+  "submission_rows": 101503,
+  "id_unique": 101503
+}
